@@ -16,7 +16,7 @@
 <body>
 
 <!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
-<nav class="nav">
+<nav class="nav" id="main-nav">
   <a class="nav-brand" href="index.html">
     <img src="https://vlad14151.github.io/EthanUtilities2.0/EthanIconClean.gif" alt="Ethan's Utilities"/>
     Ethan's Utilities
@@ -32,6 +32,19 @@
   <a class="nav-cta" href="https://discord.gg/ethansworld" target="_blank">
     <img class="nav-icon" src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Discord%20Icon.png" alt="Discord"/>
     <span>Discord</span>
+  </a>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Home</a>
+  <a href="guide.html" class="active">Commands</a>
+  <a href="terms.html">Terms</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="credits.html">Credits</a>
+  <a href="https://discord.gg/ethansworld" target="_blank" class="nav-mobile-discord">
+    <img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Discord%20Icon.png" width="16" height="16" alt=""/> Join Discord
   </a>
 </nav>
 
@@ -50,6 +63,8 @@
     <button class="cmd-tab" onclick="tab(this,'cat-stocks')">📈 Stocks</button>
     <button class="cmd-tab" onclick="tab(this,'cat-premium')">👑 Premium</button>
     <button class="cmd-tab" onclick="tab(this,'cat-utils')">🔧 Utilities</button>
+    <!-- Secret admin tab — revealed by typing "Admin" on the page -->
+    <button class="cmd-tab admin-secret-tab" id="admin-tab" onclick="tab(this,'cat-admin')" style="display:none;background:rgba(237,66,69,.12);border-color:rgba(237,66,69,.3);color:#f87171">⚙️ Admin</button>
   </div>
 
   <!-- ── Economy ────────────────────────────────────────────────── -->
@@ -197,6 +212,40 @@
     </div>
   </div>
 
+  <!-- ── Admin (hidden — type "Admin" to reveal) ───────────────── -->
+  <div class="cmd-section" id="cat-admin">
+    <div class="info-box" style="background:rgba(237,66,69,.07);border-color:rgba(237,66,69,.25);color:#f87171;margin-bottom:24px">
+      🔒 <strong>Admin-only commands.</strong> These require admin/staff permissions and are not visible to regular users.
+    </div>
+
+    <div class="cmd-group">
+      <div class="cmd-group-title" style="color:#f87171">💰 Economy Management</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">💸</div><div><div class="cmd-name">!money-summon @user &lt;cash|bank|robux|depositedrobux|money&gt; &lt;amount&gt;</div><div class="cmd-desc">Add currency to a user's account</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">💥</div><div><div class="cmd-name">!money-destroy @user &lt;cash|bank|robux|depositedrobux|money&gt; &lt;amount&gt;</div><div class="cmd-desc">Remove currency from a user's account</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">📊</div><div><div class="cmd-name">!economy-stats</div><div class="cmd-desc">View server-wide economy statistics (total money in circulation, active users, etc.)</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">👁️</div><div><div class="cmd-name">!eco-hide @user</div><div class="cmd-desc">Hide a user from the economy leaderboard</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">🔓</div><div><div class="cmd-name">!eco-unhide @user</div><div class="cmd-desc">Restore a hidden user to the leaderboard</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">⚡</div><div><div class="cmd-name">!eco-xp &lt;add|remove&gt; @user &lt;amount&gt;</div><div class="cmd-desc">Manually add or remove economy XP from a user</div></div></div>
+      </div>
+    </div>
+
+    <div class="cmd-group">
+      <div class="cmd-group-title" style="color:#f87171">🎁 Codes & Rewards</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">🎟️</div><div><div class="cmd-name">!createcode [code] [reward] [currency] [uses] [global]</div><div class="cmd-desc">Create a redeemable code — currencies: Robux / Fish / DRobux / Subscription / XP. Set Global to True for all users.</div></div></div>
+      </div>
+    </div>
+
+    <div class="cmd-group">
+      <div class="cmd-group-title" style="color:#f87171">🎰 Lottery Control</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">▶️</div><div><div class="cmd-name">!lotterystart</div><div class="cmd-desc">Start a new lottery round — enables ticket purchases with <code class="cmd-badge">!lotterybuy</code></div></div></div>
+        <div class="cmd-card"><div class="cmd-chip" style="background:rgba(237,66,69,.1);border-color:rgba(237,66,69,.2)">⏹️</div><div><div class="cmd-name">!lotterystop</div><div class="cmd-desc">Stop and clear the current lottery — all unsettled tickets are discarded</div></div></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ══ FOOTER ════════════════════════════════════════════════════════ -->
@@ -218,6 +267,57 @@ function tab(btn, sectionId) {
   btn.classList.add('active');
   document.getElementById(sectionId).classList.add('on');
 }
+
+/* ── Secret admin panel ─────────────────────────────────────────── */
+(function() {
+  let buf = '';
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
+    if (e.key.length !== 1) return; // ignore Shift, Enter, etc.
+    buf += e.key;
+    buf = buf.slice(-5);
+    if (buf.toLowerCase() === 'admin') {
+      buf = '';
+      const adminTab = document.getElementById('admin-tab');
+      if (adminTab.style.display === 'none') {
+        adminTab.style.display = 'inline-flex';
+        adminTab.click();
+        // Small toast notification
+        const toast = document.createElement('div');
+        toast.textContent = '🔓 Admin panel unlocked';
+        toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1d24;border:1px solid rgba(237,66,69,.4);color:#f87171;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;animation:fadeInUp .3s ease';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+      }
+    }
+  });
+})();
+
+/* ── Burger menu ─────────────────────────────────────────────────── */
+(function() {
+  const burger = document.getElementById('nav-burger');
+  const mobile = document.getElementById('nav-mobile');
+  burger.addEventListener('click', () => {
+    const open = mobile.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobile.classList.remove('open');
+    burger.classList.remove('open');
+  }));
+})();
+
+/* ── Scroll reveal ───────────────────────────────────────────────── */
+(function() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.cmd-card, .info-box, .info-box-gold').forEach(el => {
+    el.classList.add('reveal');
+    obs.observe(el);
+  });
+})();
 </script>
 </body>
 </html>
