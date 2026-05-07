@@ -16,7 +16,7 @@
 <body>
 
 <!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
-<nav class="nav">
+<nav class="nav" id="main-nav">
   <a class="nav-brand" href="index.html">
     <img src="https://vlad14151.github.io/EthanUtilities2.0/EthanIconClean.gif" alt="Ethan's Utilities"/>
     Ethan's Utilities
@@ -32,6 +32,19 @@
   <a class="nav-cta" href="https://discord.gg/ethansworld" target="_blank">
     <img class="nav-icon" src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Discord%20Icon.png" alt="Discord"/>
     <span>Discord</span>
+  </a>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Home</a>
+  <a href="guide.html">Commands</a>
+  <a href="terms.html" class="active">Terms</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="credits.html">Credits</a>
+  <a href="https://discord.gg/ethansworld" target="_blank" class="nav-mobile-discord">
+    <img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Discord%20Icon.png" width="16" height="16" alt=""/> Join Discord
   </a>
 </nav>
 
@@ -245,5 +258,24 @@
   </div>
 </footer>
 
+<script>
+(function() {
+  const burger = document.getElementById('nav-burger');
+  const mobile = document.getElementById('nav-mobile');
+  burger.addEventListener('click', () => {
+    const open = mobile.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobile.classList.remove('open');
+    burger.classList.remove('open');
+  }));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.rule-item').forEach(el => { el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
 </body>
 </html>
