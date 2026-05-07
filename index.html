@@ -101,7 +101,15 @@
    See the README / bot setup guide for how to add the Express
    status server to your bot in 5 lines of code.
 ────────────────────────────────────────────────────────────────── */
-const STATUS_API = 'http://142.248.80.164:9768/status'; // base bot URL
+const STATUS_API  = 'http://142.248.80.164:9768/status';
+const OFFLINE_ICON = 'https://vlad14151.github.io/EthanUtilities2.0/Icons/Offline.png';
+
+// Three proxies tried in order — first success wins, avoids false offline on flaky proxies
+const PROXIES = [
+  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+];
 
 function fmtUptime(sec) {
   const d = Math.floor(sec / 86400);
@@ -112,45 +120,51 @@ function fmtUptime(sec) {
   return `${m}m`;
 }
 
-const OFFLINE_ICON = 'https://vlad14151.github.io/EthanUtilities2.0/Icons/Offline.png';
+function showOnline(el, tag, uptime) {
+  el.textContent = fmtUptime(uptime);
+  el.style.color = '#86efac';
+  tag.style.cssText = 'display:inline-flex';
+  tag.innerHTML = '<span class="dot-g"></span><span>Online</span>';
+}
+
+function showOffline(el, tag) {
+  el.innerHTML = `<img src="${OFFLINE_ICON}" width="28" height="28" style="object-fit:contain;vertical-align:middle"/> Offline`;
+  el.style.color = 'var(--sub)';
+  tag.style.display    = 'inline-flex';
+  tag.style.background = 'rgba(148,155,164,.08)';
+  tag.style.border     = '1px solid rgba(148,155,164,.2)';
+  tag.style.color      = 'var(--sub)';
+  tag.innerHTML = '<span style="width:5px;height:5px;border-radius:50%;background:var(--dim);display:inline-block"></span><span>Offline</span>';
+}
 
 async function fetchStatus() {
   if (!STATUS_API) return;
-  const el  = document.getElementById('uptime-val');
-  const tag = document.getElementById('uptime-tag');
-  try {
-    // Wrap in allorigins with a timestamp cache-buster so the proxy never serves stale data
-    const bust = Date.now();
-    const proxied = `https://api.allorigins.win/raw?url=${encodeURIComponent(STATUS_API + '?_t=' + bust)}&_cb=${bust}`;
-    const res  = await fetch(proxied, { signal: AbortSignal.timeout(6000), cache: 'no-store' });
-    const data = await res.json();
-    if (data.online && typeof data.uptime === 'number') {
-      el.textContent    = fmtUptime(data.uptime);
-      el.style.color    = '#86efac';
-      tag.style.display = 'inline-flex';
-      tag.innerHTML     = '<span class="dot-g"></span><span>Online</span>';
-    } else {
-      el.innerHTML      = `<img src="${OFFLINE_ICON}" width="28" height="28" style="object-fit:contain;vertical-align:middle"/> Offline`;
-      el.style.color    = 'var(--sub)';
-      tag.style.display = 'inline-flex';
-      tag.style.background = 'rgba(148,155,164,.08)';
-      tag.style.border     = '1px solid rgba(148,155,164,.2)';
-      tag.style.color      = 'var(--sub)';
-      tag.innerHTML        = '<span style="width:5px;height:5px;border-radius:50%;background:var(--dim);display:inline-block"></span><span>Offline</span>';
+  const el   = document.getElementById('uptime-val');
+  const tag  = document.getElementById('uptime-tag');
+  const bust = Date.now();
+  const target = `${STATUS_API}?_t=${bust}`;
+
+  for (const proxy of PROXIES) {
+    try {
+      const res = await fetch(proxy(target), { signal: AbortSignal.timeout(6000), cache: 'no-store' });
+      if (!res.ok) continue;
+      const data = await res.json();
+      if (data.online && typeof data.uptime === 'number') {
+        showOnline(el, tag, data.uptime);
+      } else {
+        showOffline(el, tag);
+      }
+      return; // a proxy worked — stop here
+    } catch {
+      // this proxy failed, try the next one
     }
-  } catch {
-    el.innerHTML      = `<img src="${OFFLINE_ICON}" width="28" height="28" style="object-fit:contain;vertical-align:middle"/> Offline`;
-    el.style.color    = '#ed4245';
-    tag.style.display = 'inline-flex';
-    tag.style.background = 'rgba(237,66,69,.08)';
-    tag.style.border     = '1px solid rgba(237,66,69,.2)';
-    tag.style.color      = '#fca5a5';
-    tag.innerHTML        = '<span style="width:5px;height:5px;border-radius:50%;background:#ed4245;display:inline-block"></span><span>Offline</span>';
   }
+  // all proxies failed — don't flip to offline to avoid false negatives
+  // just leave the last known state as-is
 }
 
 fetchStatus();
-setInterval(fetchStatus, 60000); // refresh every 60 seconds
+setInterval(fetchStatus, 60000);
 </script>
 </body>
 </html>
