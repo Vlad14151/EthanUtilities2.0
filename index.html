@@ -6,7 +6,6 @@
 <title>Ethan's Utilities 2.0</title>
 <link rel="icon" href="EthanIconClean.gif"/>
 <link rel="stylesheet" href="style.css"/>
-<!-- Discord / social embed tags -->
 <meta property="og:title" content="Ethan's Utilities 2.0"/>
 <meta property="og:description" content="A powerful utility bot built for the Ethan's World Discord server, designed to handle everything from economy and giveaways to user utilities, subscriptions, and server management."/>
 <meta property="og:image" content="Icons/EthansWorldBanner.png"/>
@@ -16,7 +15,7 @@
 </head>
 <body>
 
-<!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
+
 <nav class="nav" id="main-nav">
   <a class="nav-brand" href="index">
     <img src="EthanIconClean.gif" alt="Ethan's Utilities"/>
@@ -38,7 +37,6 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
-<!-- Mobile nav -->
 <nav class="nav-mobile" id="nav-mobile">
   <a href="index" class="active">Home</a>
   <a href="guide">Commands</a>
@@ -50,7 +48,6 @@
   </a>
 </nav>
 
-<!-- ══ HERO ════════════════════════════════════════════════════════ -->
 <div class="hero">
   <div class="hero-pill anim-hero-pill">
     <span class="dot"></span> Live · Ethan's Community
@@ -70,17 +67,15 @@
   </div>
 </div>
 
-<!-- ══ STATS BAR ════════════════════════════════════════════════════ -->
 <div class="home-stats">
   <div class="stat">
     <div class="stat-n" style="color:#a5b4fc">50+</div>
     <div class="stat-l">Commands</div>
   </div>
   <div class="stat">
-    <div class="stat-n" style="color:#86efac">BETA-v0.5</div>
+    <div class="stat-n" style="color:#86efac">v1</div>
     <div class="stat-l">Bot Version</div>
   </div>
-  <!-- Uptime stat — auto-fetches from bot status API if configured -->
   <div class="stat" id="uptime-stat">
     <div class="stat-n" id="uptime-val" style="color:var(--sub)">Offline</div>
     <div class="stat-l">Bot Uptime</div>
@@ -90,7 +85,6 @@
   </div>
 </div>
 
-<!-- ══ FOOTER ════════════════════════════════════════════════════════ -->
 <footer>
   <span>© 2026 Ethan's Utilities 2.0 · A bot for Ethan's Community</span>
   <div class="foot-links">
@@ -103,22 +97,10 @@
 </footer>
 
 <script>
-/* ──────────────────────────────────────────────────────────────────
-   UPTIME CONFIG
-   Set STATUS_API to your bot's status endpoint URL.
-   Leave as '' to hide the uptime stat (shows 24/7 instead).
 
-   Example: 'http://your-vps-ip:3000/status'
-   The endpoint should return JSON:  { online: true, uptime: 3661 }
-   (uptime in seconds)
-
-   See the README / bot setup guide for how to add the Express
-   status server to your bot in 5 lines of code.
-────────────────────────────────────────────────────────────────── */
 const STATUS_API  = 'http://142.248.80.164:9768/status';
 const OFFLINE_ICON = 'Icons/Offline.png';
 
-// Three proxies tried in order — first success wins, avoids false offline on flaky proxies
 const PROXIES = [
   u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
   u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
@@ -155,7 +137,6 @@ async function fetchStatus() {
   if (!STATUS_API) return;
   const el   = document.getElementById('uptime-val');
   const tag  = document.getElementById('uptime-tag');
-  // Show offline immediately — will update once API responds
   showOffline(el, tag);
   const bust = Date.now();
   const target = `${STATUS_API}?_t=${bust}`;
@@ -170,20 +151,19 @@ async function fetchStatus() {
       } else {
         showOffline(el, tag);
       }
-      return; // a proxy worked — stop here
+      return; 
     } catch {
-      // this proxy failed, try the next one
+      
     }
   }
-  // all proxies failed — don't flip to offline to avoid false negatives
-  // just leave the last known state as-is
+
 }
 
 fetchStatus();
 setInterval(fetchStatus, 60000);
 </script>
 <script>
-/* ── Burger menu ──────────────────────────────────────────────────── */
+
 (function() {
   const burger = document.getElementById('nav-burger');
   const mobile = document.getElementById('nav-mobile');
@@ -197,7 +177,7 @@ setInterval(fetchStatus, 60000);
     burger.classList.remove('open');
   }));
 
-  /* Stats bar reveal */
+  
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
