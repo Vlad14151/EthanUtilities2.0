@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethan's World Utilities</title>
+  <style>
+    /* ── Variables ───────────────────────────────────────────────── */
+    :root {
+      --bg:        #0f1012;
+      --surface:   #16181c;
+      --surface2:  #1e2026;
+      --border:    #2a2d35;
+      --accent:    #5865f2;
+      --accent2:   #eb459e;
+      --red:       #ed4245;
+      --green:     #57f287;
+      --text:      #e2e5ea;
+      --muted:     #7d838f;
+      --rule-bar:  #58a6ff;
+    }
+
+    /* ── Reset ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header (editable) ───────────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .badge {
+      font-size: 11px;
+      background: var(--accent);
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────────────── */
+    nav {
+      display: flex;
+      gap: 4px;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+      cursor: pointer;
+    }
+    nav a:hover, nav a.active { background: var(--surface2); color: var(--text); }
+
+    /* ── Pages ───────────────────────────────────────────────────── */
+    .page { display: none; flex: 1; }
+    .page.active { display: flex; flex-direction: column; }
+
+    /* ── Hero (Home) ─────────────────────────────────────────────── */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      gap: 28px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(88,101,242,0.12);
+      border: 1px solid rgba(88,101,242,0.3);
+      color: #a5b4fc;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 58px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+      user-select: none;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #4752c4);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(88,101,242,0.35);
+    }
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-discord {
+      background: linear-gradient(135deg, #5865f2, #4752c4);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(88,101,242,0.3);
+    }
+    .btn-icon { font-size: 18px; }
+
+    /* Stats row */
+    .stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 26px; font-weight: 800; color: var(--text); }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Inner pages (TOS / Privacy) ─────────────────────────────── */
+    .inner { max-width: 820px; margin: 0 auto; padding: 56px 24px 80px; width: 100%; }
+    .page-title {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .page-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    /* Discord-style container */
+    .discord-container {
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 4px solid #58a6ff;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+    .container-header {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .container-sub {
+      color: var(--muted);
+      font-size: 13.5px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      background: rgba(88,101,242,0.07);
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Rule card */
+    .rule {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rule:last-child { border-bottom: none; }
+    .rule-num {
+      min-width: 36px;
+      height: 36px;
+      background: rgba(88,101,242,0.12);
+      border: 1px solid rgba(88,101,242,0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #a5b4fc;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .rule-body {}
+    .rule-title {
+      font-weight: 700;
+      font-size: 14.5px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .rule-desc {
+      color: #b0b7c3;
+      font-size: 13.5px;
+      line-height: 1.65;
+      padding-left: 12px;
+      border-left: 2px solid var(--border);
+    }
+    .rule-desc li { list-style: none; padding: 2px 0; }
+    .rule-desc li::before { content: "› "; color: var(--muted); }
+
+    .verdict-box {
+      margin-top: 24px;
+      background: rgba(87,242,135,0.06);
+      border: 1px solid rgba(87,242,135,0.2);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13.5px;
+      color: #a7f3c0;
+      line-height: 1.6;
+    }
+    .verdict-box strong { color: var(--green); }
+
+    /* Privacy page */
+    .privacy-section { margin-bottom: 36px; }
+    .privacy-section h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .privacy-section p, .privacy-section li {
+      color: #b0b7c3;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .privacy-section ul { padding-left: 20px; }
+    .privacy-section li { margin-bottom: 4px; }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    footer span { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 0 16px; }
+      .hero { padding: 60px 16px 40px; }
+      .discord-container { padding: 20px 18px; }
+      .inner { padding: 36px 16px 60px; }
+      footer { padding: 16px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HEADER — edit name, badge, nav links here
+════════════════════════════════════════════ -->
+<header>
+  <a class="logo" onclick="showPage('home')">
+    <div class="logo-icon">🛠️</div>
+    Ethan's World
+    <span class="badge">Utilities</span>
+  </a>
+  <nav>
+    <a onclick="showPage('home')"    id="nav-home"    class="active">Home</a>
+    <a onclick="showPage('tos')"     id="nav-tos">TOS</a>
+    <a onclick="showPage('privacy')" id="nav-privacy">Privacy</a>
+    <a href="https://discord.gg/ethansworld" target="_blank" id="nav-discord">Discord ↗</a>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">✅ Trusted by the Ethan's World Community</div>
+
+    <!-- Edit heading and sub-text here -->
+    <h1>The Official<br/><span>Ethan's World</span> Bot</h1>
+    <p>A powerful utility bot built for the Ethan's World Discord server — economy, raffles, giveaways, and more.</p>
+
+    <div class="hero-buttons">
+      <button class="btn btn-primary" onclick="showPage('tos')">
+        <span class="btn-icon">📜</span> Terms of Service
+      </button>
+      <button class="btn btn-secondary" onclick="showPage('privacy')">
+        <span class="btn-icon">🔒</span> Privacy Policy
+      </button>
+      <a class="btn btn-discord" href="https://discord.gg/ethansworld" target="_blank">
+        <span class="btn-icon">💬</span> Our Discord
+      </a>
+    </div>
+  </div>
+
+  <!-- Edit stats here -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">19+</div>
+      <div class="stat-label">Rules & Guidelines</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2.0</div>
+      <div class="stat-label">Bot Version</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Uptime Goal</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">🔐</div>
+      <div class="stat-label">Secure Economy</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TOS PAGE — edit rules below
+════════════════════════════════════════════ -->
+<div class="page" id="page-tos">
+  <div class="inner">
+    <div class="page-title">🛠️ Bot Guidelines & Terms of Service</div>
+    <div class="page-subtitle">Last updated · Ethan's World Utilities 2.0 · Please read carefully before using the bot.</div>
+
+    <div class="discord-container">
+      <div class="container-header">📋 Server Bot Guidelines</div>
+      <div class="container-sub">
+        ✅ Please read the bot guidelines below carefully. Violations may result in warnings, temporary blacklist, or permanent ban.
+      </div>
+
+      <!-- ── Rules — edit text here ────────────────────────────── -->
+      <div class="rule">
+        <div class="rule-num">#1</div>
+        <div class="rule-body">
+          <div class="rule-title">Rule Changes & Agreement</div>
+          <div class="rule-desc">These rules may be updated at any time without prior notice. By continuing to use the bot, you agree to all current and future rules.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#2</div>
+        <div class="rule-body">
+          <div class="rule-title">Exploits, Abuse & Economy Manipulation</div>
+          <div class="rule-desc">Exploiting bugs, glitches, duplication, unintended command behavior, or any form of system abuse is strictly prohibited and will result in a permanent bot ban.<br/><br/>Attempting to gain an unfair advantage, manipulate the economy, or transfer items/currency to avoid punishment may result in asset removal, rollback, or a permanent bot ban.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#3</div>
+        <div class="rule-body">
+          <div class="rule-title">Automation</div>
+          <div class="rule-desc">Using macros, self-bots, scripts, or any form of automation to interact with the bot is strictly prohibited.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#4</div>
+        <div class="rule-body">
+          <div class="rule-title">Bypassing Punishments</div>
+          <div class="rule-desc">Attempting to bypass blacklists, bans, or punishments using alternate accounts or other methods will result in a permanent ban across all accounts.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#5</div>
+        <div class="rule-body">
+          <div class="rule-title">Bot Disruption</div>
+          <div class="rule-desc">Intentionally lagging, crashing, spamming, or disrupting bot performance or stability is not allowed.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#6</div>
+        <div class="rule-body">
+          <div class="rule-title">Command Abuse & Spam</div>
+          <div class="rule-desc">Spamming commands, abusing bot features, or overloading the bot with excessive usage is not allowed.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#7</div>
+        <div class="rule-body">
+          <div class="rule-title">Economy Enforcement</div>
+          <div class="rule-desc">Staff may remove, rollback, or adjust any unfair, bugged, or exploited transactions at any time. All decisions are final.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#8</div>
+        <div class="rule-body">
+          <div class="rule-title">Currency Transfers</div>
+          <div class="rule-desc">Transferring currency or items between accounts for the purpose of evading punishments, hoarding, or manipulating the economy is not allowed and may result in asset removal and a permanent ban.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#9</div>
+        <div class="rule-body">
+          <div class="rule-title">Season Pass & Limited Events</div>
+          <div class="rule-desc">Season Pass progress, rewards, and event-exclusive items are tied to their respective seasons. No compensation will be given for missed rewards due to inactivity or failure to claim before the season ends.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#10</div>
+        <div class="rule-body">
+          <div class="rule-title">Gambling Acknowledgement</div>
+          <div class="rule-desc">By using any gambling-related commands, you acknowledge that all outcomes are random and for entertainment purposes only. No refunds will be issued for gambling losses under any circumstances.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#11</div>
+        <div class="rule-body">
+          <div class="rule-title">Rate Limits</div>
+          <div class="rule-desc">Commands may have hidden or visible rate limits to maintain bot stability. Attempting to bypass, abuse, or exploit rate limits is strictly prohibited and may result in a temporary or permanent blacklist.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#12</div>
+        <div class="rule-body">
+          <div class="rule-title">Code Redemption</div>
+          <div class="rule-desc">Codes are for personal use only. Selling, distributing, or sharing codes obtained through giveaways, staff, or rewards without permission is strictly prohibited.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#13</div>
+        <div class="rule-body">
+          <div class="rule-title">Raffle & Giveaway Conduct</div>
+          <div class="rule-desc">Attempting to manipulate raffle or giveaway outcomes, using multiple accounts, or using automation to gain unfair entries is strictly prohibited and will result in disqualification and a permanent ban.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#14</div>
+        <div class="rule-body">
+          <div class="rule-title">Robux Deposits & Withdrawals</div>
+          <div class="rule-desc">
+            <ul>
+              <li>Robux deposited into the system cannot be withdrawn or reversed once confirmed</li>
+              <li>Deposited Robux does not transfer ownership or entitle the depositor to compensation</li>
+              <li>Minimum 50 Robux is required to request a withdrawal</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#15</div>
+        <div class="rule-body">
+          <div class="rule-title">Bot Dependency & Liability</div>
+          <div class="rule-desc">The bot is provided as-is with no guarantee of uptime, availability, or continuity of features. Ethan's World is not responsible for any loss of progress, currency, items, or data due to outages, updates, crashes, or technical issues.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#16</div>
+        <div class="rule-body">
+          <div class="rule-title">Staff Impersonation</div>
+          <div class="rule-desc">Impersonating staff members, the bot, or any official server entity to deceive users or gain an unfair advantage is strictly prohibited.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#17</div>
+        <div class="rule-body">
+          <div class="rule-title">Refunds & Data</div>
+          <div class="rule-desc">No refunds will be given unless valid proof is provided and approved by staff. This applies to all currencies, items, and systems. Data loss caused by errors, crashes, updates, or resets is not the bot's responsibility. All refund, restore, or compensation decisions are final and determined by staff.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#18</div>
+        <div class="rule-body">
+          <div class="rule-title">Warnings & Enforcement</div>
+          <div class="rule-desc">4 warnings = temporary blacklist.</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-num">#19</div>
+        <div class="rule-body">
+          <div class="rule-title">Resets & Progress</div>
+          <div class="rule-desc">The bot may reset economy, progress, or data at any time. No compensation is guaranteed unless officially announced.</div>
+        </div>
+      </div>
+
+      <!-- Verdict -->
+      <div class="verdict-box">
+        ✅ <strong>The final verdict lies with Ethan's World staff at all times.</strong><br/>
+        Server staff will use their own judgement when enforcing our rules. Not every rule is listed — use common sense at all times. Rules may be updated at any time, and continued use of the server means you agree to follow all guidelines.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PRIVACY PAGE — edit sections below
+════════════════════════════════════════════ -->
+<div class="page" id="page-privacy">
+  <div class="inner">
+    <div class="page-title">🔒 Privacy Policy</div>
+    <div class="page-subtitle">Ethan's World Utilities 2.0 · How we handle your data.</div>
+
+    <div class="discord-container">
+
+      <div class="privacy-section">
+        <h3>📌 What Data We Collect</h3>
+        <p>When you use Ethan's World Utilities, we may store the following:</p>
+        <ul>
+          <li>Your Discord User ID (to track economy, TOS acceptance, and blacklist status)</li>
+          <li>Message counts within the designated raffle channel</li>
+          <li>Economy balances, inventory, and transaction history</li>
+          <li>Raffle and giveaway participation records</li>
+          <li>Robux deposit and withdrawal records</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h3>🔐 How We Use Your Data</h3>
+        <p>All collected data is used solely to operate the bot's features:</p>
+        <ul>
+          <li>Running the economy system (balances, shops, gambling)</li>
+          <li>Managing raffles, giveaways, and season passes</li>
+          <li>Enforcing community rules (blacklists, warnings)</li>
+          <li>Processing Robux deposits and withdrawal requests</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h3>🚫 What We Don't Do</h3>
+        <ul>
+          <li>We do not sell or share your data with third parties</li>
+          <li>We do not store message content beyond what is required for spam detection</li>
+          <li>We do not collect sensitive personal information</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h3>🗑️ Data Deletion</h3>
+        <p>If you would like your data removed, please contact staff in the <a href="https://discord.gg/ethansworld" target="_blank" style="color:var(--accent)">Ethan's World Discord server</a>. Note that some records (e.g. transaction history) may be retained for moderation purposes.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h3>⚠️ Disclaimer</h3>
+        <p>Ethan's World Utilities is a community bot and is not affiliated with Discord Inc. or Roblox Corporation. Use of this bot is subject to both our Terms of Service and <a href="https://discord.com/terms" target="_blank" style="color:var(--accent)">Discord's Terms of Service</a>.</p>
+      </div>
+
+      <div class="verdict-box">
+        🔒 <strong>Your privacy matters to us.</strong><br/>
+        We only store what is necessary to run the bot. If you have any concerns, reach out to staff in our Discord server.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FOOTER — edit links / text here
+════════════════════════════════════════════ -->
+<footer>
+  <span>© 2026 Ethan's World Utilities · All rights reserved.</span>
+  <div class="footer-links">
+    <a onclick="showPage('tos')">Terms of Service</a>
+    <a onclick="showPage('privacy')">Privacy Policy</a>
+    <a href="https://discord.gg/ethansworld" target="_blank">Discord ↗</a>
+  </div>
+</footer>
+
+<script>
+  function showPage(id) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+    // Show selected
+    document.getElementById('page-' + id).classList.add('active');
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
