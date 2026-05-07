@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Commands — Ethan's Utilities 2.0</title>
+<link rel="icon" href="https://vlad14151.github.io/EthanUtilities2.0/EthanIconClean.gif"/>
+<link rel="stylesheet" href="style.css"/>
+<meta property="og:title" content="Commands — Ethan's Utilities 2.0"/>
+<meta property="og:description" content="Full command reference — economy, gambling, shop, stocks, premium and utility commands."/>
+<meta property="og:image" content="https://vlad14151.github.io/EthanUtilities2.0/Icons/EthansWorldBanner.png"/>
+<meta property="og:type" content="website"/>
+<meta name="theme-color" content="#5865f2"/>
+<meta name="twitter:card" content="summary_large_image"/>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <img src="https://vlad14151.github.io/EthanUtilities2.0/EthanIconClean.gif" alt="Ethan's Utilities"/>
+    Ethan's Utilities
+    <span class="ver">2.0</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="guide.html" class="active">Commands</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="credits.html">Credits</a>
+  </div>
+  <a class="nav-cta" href="https://discord.gg/ethansworld" target="_blank">
+    <img class="nav-icon" src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Discord%20Icon.png" alt="Discord"/>
+    <span>Discord</span>
+  </a>
+</nav>
+
+<!-- ══ CONTENT ═════════════════════════════════════════════════════ -->
+<div class="inner">
+  <div class="inner-header">
+    <h2>📖 Command Reference</h2>
+    <p>Economy, gambling, utilities and premium commands — all non-admin. Use prefix <code style="background:var(--s2);padding:2px 7px;border-radius:5px;font-size:12px">!</code> for all commands.</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="cmd-tabs">
+    <button class="cmd-tab active" onclick="tab(this,'cat-economy')">💰 Economy</button>
+    <button class="cmd-tab" onclick="tab(this,'cat-gambling')">🎲 Gambling</button>
+    <button class="cmd-tab" onclick="tab(this,'cat-shop')">🛒 Shop & Items</button>
+    <button class="cmd-tab" onclick="tab(this,'cat-stocks')">📈 Stocks</button>
+    <button class="cmd-tab" onclick="tab(this,'cat-premium')">👑 Premium</button>
+    <button class="cmd-tab" onclick="tab(this,'cat-utils')">🔧 Utilities</button>
+  </div>
+
+  <!-- ── Economy ────────────────────────────────────────────────── -->
+  <div class="cmd-section on" id="cat-economy">
+    <div class="cmd-group">
+      <div class="cmd-group-title">💰 Earning</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">📅</div><div><div class="cmd-name">!daily</div><div class="cmd-desc">Claim your daily reward (+1 Robux)</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">📆</div><div><div class="cmd-name">!weekly</div><div class="cmd-desc">Claim your weekly reward (+5 Robux)</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💼</div><div><div class="cmd-name">!work</div><div class="cmd-desc">Work to earn Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎣</div><div><div class="cmd-name">!fish</div><div class="cmd-desc">Fish to earn Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">⛏️</div><div><div class="cmd-name">!dig <span class="lvl-badge">Lv.12+</span></div><div class="cmd-desc">Dig for treasure and earn Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🌲</div><div><div class="cmd-name">!chop</div><div class="cmd-desc">Chop trees to earn Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🙏</div><div><div class="cmd-name">!beg</div><div class="cmd-desc">Beg for Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🔍</div><div><div class="cmd-name">!search</div><div class="cmd-desc">Search locations for Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🌾</div><div><div class="cmd-name">!farm</div><div class="cmd-desc">Plant seeds, then use <code class="cmd-badge">!harvest</code> to collect rewards</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🐾</div><div><div class="cmd-name">!collect</div><div class="cmd-desc">Collect income from all your pets</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎰</div><div><div class="cmd-name">!scratch</div><div class="cmd-desc">Scratch a card for a chance to win Fish Coins — rare jackpot available</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💳</div><div><div class="cmd-name">!robuxdeposit</div><div class="cmd-desc">Deposit Robux into your account</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🔄</div><div><div class="cmd-name">!convert</div><div class="cmd-desc">Convert your Fish Coins into Robux</div></div></div>
+      </div>
+    </div>
+
+    <div class="cmd-group">
+      <div class="cmd-group-title">🏦 Banking & Investing</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">📤</div><div><div class="cmd-name">!dep &nbsp;/&nbsp; !deposit &lt;amount&gt;</div><div class="cmd-desc">Deposit Fish Coins from your cash into the bank</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">📥</div><div><div class="cmd-name">!with &nbsp;/&nbsp; !withdraw &lt;amount&gt;</div><div class="cmd-desc">Withdraw Fish Coins from the bank into your cash</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">📈</div><div><div class="cmd-name">!invest &lt;amount&gt; &lt;days&gt;</div><div class="cmd-desc">Invest Fish Coins to earn daily interest — claim before it expires or lose it</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">✅</div><div><div class="cmd-name">!invest claim</div><div class="cmd-desc">Claim your matured investment and collect your principal + earnings</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">ℹ️</div><div><div class="cmd-name">!invest status</div><div class="cmd-desc">Check your active investment amount, current earnings, and expiry time</div></div></div>
+      </div>
+    </div>
+
+    <div class="cmd-group">
+      <div class="cmd-group-title">🤝 Social</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">💸</div><div><div class="cmd-name">!pay @user &lt;amount&gt;</div><div class="cmd-desc">Transfer Fish Coins to another user</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🦹</div><div><div class="cmd-name">!rob @user <span class="lvl-badge">Lv.1+</span></div><div class="cmd-desc">Attempt to rob another user — 50% chance to succeed or get caught and fined</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💻</div><div><div class="cmd-name">!hack @user <span class="lvl-badge">Lv.1+</span></div><div class="cmd-desc">Hack a user to steal Fish Coins — risky if you get caught</div></div></div>
+      </div>
+    </div>
+
+    <div class="cmd-group">
+      <div class="cmd-group-title">📊 Balance & Rankings</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">💰</div><div><div class="cmd-name">!bal &nbsp;/&nbsp; !balance</div><div class="cmd-desc">View your cash, bank balance, and rank</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💎</div><div><div class="cmd-name">!balrobux</div><div class="cmd-desc">View your Robux balance and rank</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💵</div><div><div class="cmd-name">!balmoney</div><div class="cmd-desc">View your total money balance across all currencies</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🏦</div><div><div class="cmd-name">!baltotal</div><div class="cmd-desc">View your combined currency total and rank</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🏆</div><div><div class="cmd-name">!lb</div><div class="cmd-desc">View the top 10 richest members (combined)</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🥇</div><div><div class="cmd-name">!lb -cash</div><div class="cmd-desc">Top 10 richest members by Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🥇</div><div><div class="cmd-name">!lb -robux</div><div class="cmd-desc">Top 10 richest members by Robux</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">⭐</div><div><div class="cmd-name">!commandlevel &nbsp;/&nbsp; !cl</div><div class="cmd-desc">View your economy level, XP progress, and all locked/unlocked commands</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Gambling ───────────────────────────────────────────────── -->
+  <div class="cmd-section" id="cat-gambling">
+    <div class="cmd-group">
+      <div class="cmd-group-title">🎲 Games</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">🦅</div><div><div class="cmd-name">!coinflip &lt;bet&gt;</div><div class="cmd-desc">50/50 coin flip — double or nothing</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎰</div><div><div class="cmd-name">!slots &lt;bet&gt; <span class="lvl-badge">Lv.3+</span></div><div class="cmd-desc">Spin the slot machine for rewards</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">📈</div><div><div class="cmd-name">!highlow &lt;bet&gt; &nbsp;/&nbsp; !hl &lt;bet&gt; <span class="lvl-badge">Lv.6+</span></div><div class="cmd-desc">Guess if the next card is higher or lower</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🪨</div><div><div class="cmd-name">!rps &lt;bet&gt; <span class="lvl-badge">Lv.9+</span></div><div class="cmd-desc">Rock Paper Scissors — pick your move after placing the bet</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎟️</div><div><div class="cmd-name">!lottery <span class="lvl-badge">Lv.10+</span></div><div class="cmd-desc">View the current lottery pool, jackpot, and your ticket count</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎫</div><div><div class="cmd-name">!lotterybuy &lt;amount&gt; <span class="lvl-badge">Lv.10+</span></div><div class="cmd-desc">Buy lottery tickets — 100 Fish Coins each, drawn every 24 hours</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip"><img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Roulette.png" width="22" height="22" style="object-fit:contain"/></div><div><div class="cmd-name">!roulette &lt;bet&gt; &lt;red|black|green&gt; <span class="lvl-badge">Lv.15+</span></div><div class="cmd-desc">Place a bet on roulette — pick your color</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🔫</div><div><div class="cmd-name">!chamber &lt;bet&gt; &lt;chambers&gt; <span class="lvl-badge">Lv.18+</span></div><div class="cmd-desc">Russian roulette (family-friendly) — set the number of chambers</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🃏</div><div><div class="cmd-name">!blackjack &lt;bet&gt; &nbsp;/&nbsp; !bj &lt;bet&gt; <span class="lvl-badge">Lv.21+</span></div><div class="cmd-desc">Classic Blackjack — beat the dealer without going over 21</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🚀</div><div><div class="cmd-name">!crash &lt;bet&gt; <span class="lvl-badge">Lv.24+</span></div><div class="cmd-desc">Rocket crash — multiplier rises automatically, cash out before it crashes</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💸</div><div><div class="cmd-name">!cashout <span class="lvl-badge">Lv.24+</span></div><div class="cmd-desc">Cash out your current Crash game at the current multiplier</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💣</div><div><div class="cmd-name">!mines &lt;bet&gt; <span class="lvl-badge">Lv.27+</span></div><div class="cmd-desc">Reveal tiles and grow your multiplier — cash out before hitting a mine</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🛑</div><div><div class="cmd-name">!mstop <span class="lvl-badge">Lv.27+</span></div><div class="cmd-desc">Cash out your current Mines winnings safely</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🦹</div><div><div class="cmd-name">!crime <span class="lvl-badge">Lv.1+</span></div><div class="cmd-desc">Attempt a crime to earn Fish Coins — success is not guaranteed</div></div></div>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:8px">
+      🔒 <strong>Level-locked commands</strong> unlock as you earn economy XP. Use <code style="background:var(--s3);padding:1px 5px;border-radius:4px">!commandlevel</code> to track your progress and see what unlocks next.
+    </div>
+  </div>
+
+  <!-- ── Shop ──────────────────────────────────────────────────── -->
+  <div class="cmd-section" id="cat-shop">
+    <div class="cmd-group">
+      <div class="cmd-group-title">🛒 Shopping</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">🏪</div><div><div class="cmd-name">!shop [page]</div><div class="cmd-desc">Browse all available items in the Fish Coins shop</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">⛏️</div><div><div class="cmd-name">!digstore</div><div class="cmd-desc">Access the digging equipment shop</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">💎</div><div><div class="cmd-name">!robuxshop</div><div class="cmd-desc">Browse exclusive items and roles purchasable with Robux</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🛍️</div><div><div class="cmd-name">!buy &lt;item name&gt;</div><div class="cmd-desc">Purchase an item using Fish Coins</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎒</div><div><div class="cmd-name">!inventory &nbsp;/&nbsp; !inv</div><div class="cmd-desc">View and manage your item inventory</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎁</div><div><div class="cmd-name">!redeem &lt;code&gt;</div><div class="cmd-desc">Redeem a gift code for rewards</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Stocks ─────────────────────────────────────────────────── -->
+  <div class="cmd-section" id="cat-stocks">
+    <div class="cmd-group">
+      <div class="cmd-group-title">📈 Stock Market</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip"><img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Stats.png" width="22" height="22" style="object-fit:contain"/></div><div><div class="cmd-name">!stock</div><div class="cmd-desc">View current stock prices and market state</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip"><img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Stats.png" width="22" height="22" style="object-fit:contain"/></div><div><div class="cmd-name">!stockbuy &lt;amount&gt;</div><div class="cmd-desc">Purchase stocks at the current price</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip"><img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Stats.png" width="22" height="22" style="object-fit:contain"/></div><div><div class="cmd-name">!stocksell &lt;amount&gt;</div><div class="cmd-desc">Sell your stocks at the current price</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip"><img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Stats.png" width="22" height="22" style="object-fit:contain"/></div><div><div class="cmd-name">!portfolio</div><div class="cmd-desc">View your stock holdings and profit/loss stats</div></div></div>
+      </div>
+    </div>
+    <div class="info-box">
+      📌 Stock prices fluctuate dynamically based on player activity, simulating a real market. Buy low, sell high to maximize profit.
+    </div>
+  </div>
+
+  <!-- ── Premium ────────────────────────────────────────────────── -->
+  <div class="cmd-section" id="cat-premium">
+    <div class="cmd-group">
+      <div class="cmd-group-title">👑 Subscription</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">👑</div><div><div class="cmd-name">!sub buy</div><div class="cmd-desc">Purchase Premium Subscription for 50 Robux — valid for 2 weeks</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">ℹ️</div><div><div class="cmd-name">!sub info</div><div class="cmd-desc">View your Premium Subscription status and benefits</div></div></div>
+      </div>
+    </div>
+    <div class="info-box-gold">
+      ✨ <strong>Premium perks:</strong> 2× gambling winnings, boosted daily/weekly rewards, and more. Renew anytime with <code style="background:rgba(0,0,0,.3);padding:1px 5px;border-radius:4px">!sub buy</code>. You'll receive a notification 24 hours before expiration.
+    </div>
+  </div>
+
+  <!-- ── Utilities ──────────────────────────────────────────────── -->
+  <div class="cmd-section" id="cat-utils">
+    <div class="cmd-group">
+      <div class="cmd-group-title">👤 User</div>
+      <div class="cmd-grid">
+        <div class="cmd-card"><div class="cmd-chip">💤</div><div><div class="cmd-name">!afk [reason]</div><div class="cmd-desc">Set your AFK status — users will be notified when they mention you</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">✅</div><div><div class="cmd-name">!afk off &nbsp;/&nbsp; !afk remove</div><div class="cmd-desc">Remove your AFK status manually</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🔍</div><div><div class="cmd-name">!snipe</div><div class="cmd-desc">View the last deleted message in this channel</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">😮</div><div><div class="cmd-name">!rsnipe &nbsp;/&nbsp; !reactionsnipe</div><div class="cmd-desc">View the last removed reaction in this channel</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎫</div><div><div class="cmd-name">!support</div><div class="cmd-desc">Open a support ticket</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">🎫</div><div><div class="cmd-name">!seasonpass &nbsp;/&nbsp; !sp</div><div class="cmd-desc">View your Season Pass progress and rewards</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">📖</div><div><div class="cmd-name">!help &nbsp;/&nbsp; !guide</div><div class="cmd-desc">Open the interactive command guide inside Discord</div></div></div>
+        <div class="cmd-card"><div class="cmd-chip">ℹ️</div><div><div class="cmd-name">!version &nbsp;/&nbsp; !v &nbsp;/&nbsp; !credits</div><div class="cmd-desc">View the bot's current version and contributor credits</div></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════════ -->
+<footer>
+  <span>© 2026 Ethan's Utilities 2.0 · A bot for Ethan's Community</span>
+  <div class="foot-links">
+    <a href="guide.html">Commands</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="credits.html">Credits</a>
+    <a href="https://discord.gg/ethansworld" target="_blank">Discord ↗</a>
+  </div>
+</footer>
+
+<script>
+function tab(btn, sectionId) {
+  document.querySelectorAll('.cmd-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cmd-section').forEach(s => s.classList.remove('on'));
+  btn.classList.add('active');
+  document.getElementById(sectionId).classList.add('on');
+}
+</script>
+</body>
+</html>
