@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="style.css"/>
 <!-- Discord / social embed tags -->
 <meta property="og:title" content="Ethan's Utilities 2.0"/>
-<meta property="og:description" content="A bot for Ethan's Community — economy, raffles, gambling, giveaways and more, all in one place."/>
+<meta property="og:description" content="A powerful utility bot built for the Ethan's World Discord server, designed to handle everything from economy and giveaways to user utilities, subscriptions, and server management."/>
 <meta property="og:image" content="https://vlad14151.github.io/EthanUtilities2.0/Icons/EthansWorldBanner.png"/>
 <meta property="og:type" content="website"/>
 <meta name="theme-color" content="#5865f2"/>
@@ -47,11 +47,11 @@
        alt="Ethan's Utilities"/>
 
   <h1>Ethan's Utilities <em>2.0</em></h1>
-  <p>A bot for Ethan's Community — economy, raffles, gambling, giveaways and more, all in one place.</p>
+  <p>A powerful utility bot built for the Ethan's World Discord server, designed to handle everything from economy and giveaways to user utilities, subscriptions, and server management.</p>
 
   <div class="hero-btns">
     <a class="btn btn-accent" href="guide.html">📖 View Commands</a>
-    <a class="btn btn-ghost"  href="terms.html">📜 Terms of Service</a>
+    <a class="btn btn-ghost"  href="terms.html"><img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Scroll.png" width="17" height="17" alt="" style="object-fit:contain;vertical-align:middle;margin-right:2px"/> Terms of Service</a>
     <a class="btn btn-discord" href="https://discord.gg/ethansworld" target="_blank"><img src="https://vlad14151.github.io/EthanUtilities2.0/Icons/Discord%20Icon.png" width="18" height="18" alt="" style="object-fit:contain;vertical-align:middle"/> Join Discord</a>
   </div>
 </div>
@@ -66,10 +66,6 @@
     <div class="stat-n" style="color:#86efac">BETA-v0.5</div>
     <div class="stat-l">Bot Version</div>
   </div>
-  <div class="stat">
-    <div class="stat-n" style="color:#fbbf24">19</div>
-    <div class="stat-l">TOS Rules</div>
-  </div>
   <!-- Uptime stat — auto-fetches from bot status API if configured -->
   <div class="stat" id="uptime-stat">
     <div class="stat-n" id="uptime-val" style="color:#86efac">—</div>
@@ -77,10 +73,6 @@
     <div class="uptime-tag" id="uptime-tag" style="display:none">
       <span class="dot-g"></span><span id="uptime-label">Online</span>
     </div>
-  </div>
-  <div class="stat">
-    <div class="stat-n" style="color:#f472b6">24/7</div>
-    <div class="stat-l">Hosting</div>
   </div>
 </div>
 
@@ -136,12 +128,12 @@ async function fetchStatus() {
       tag.innerHTML     = '<span class="dot-g"></span><span>Online</span>';
     } else {
       el.innerHTML      = `<img src="${OFFLINE_ICON}" width="28" height="28" style="object-fit:contain;vertical-align:middle"/> Offline`;
-      el.style.color    = '#ed4245';
+      el.style.color    = 'var(--sub)';
       tag.style.display = 'inline-flex';
-      tag.style.background = 'rgba(237,66,69,.08)';
-      tag.style.border     = '1px solid rgba(237,66,69,.2)';
-      tag.style.color      = '#fca5a5';
-      tag.innerHTML        = '<span style="width:5px;height:5px;border-radius:50%;background:#ed4245;display:inline-block"></span><span>Offline</span>';
+      tag.style.background = 'rgba(148,155,164,.08)';
+      tag.style.border     = '1px solid rgba(148,155,164,.2)';
+      tag.style.color      = 'var(--sub)';
+      tag.innerHTML        = '<span style="width:5px;height:5px;border-radius:50%;background:var(--dim);display:inline-block"></span><span>Offline</span>';
     }
   } catch {
     el.innerHTML      = `<img src="${OFFLINE_ICON}" width="28" height="28" style="object-fit:contain;vertical-align:middle"/> Offline`;
