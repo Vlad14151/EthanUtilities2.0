@@ -82,10 +82,10 @@
   </div>
   <!-- Uptime stat — auto-fetches from bot status API if configured -->
   <div class="stat" id="uptime-stat">
-    <div class="stat-n" id="uptime-val" style="color:#86efac">—</div>
+    <div class="stat-n" id="uptime-val" style="color:var(--sub)">Offline</div>
     <div class="stat-l">Bot Uptime</div>
-    <div class="uptime-tag" id="uptime-tag" style="display:none">
-      <span class="dot-g"></span><span id="uptime-label">Online</span>
+    <div class="uptime-tag" id="uptime-tag" style="display:inline-flex;background:rgba(148,155,164,.08);border:1px solid rgba(148,155,164,.2);color:var(--sub)">
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--dim);display:inline-block"></span><span>Offline</span>
     </div>
   </div>
 </div>
@@ -155,6 +155,8 @@ async function fetchStatus() {
   if (!STATUS_API) return;
   const el   = document.getElementById('uptime-val');
   const tag  = document.getElementById('uptime-tag');
+  // Show offline immediately — will update once API responds
+  showOffline(el, tag);
   const bust = Date.now();
   const target = `${STATUS_API}?_t=${bust}`;
 
