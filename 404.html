@@ -25,36 +25,54 @@
   overflow: hidden;
 }
 
-/* Floating orbs in background */
+/* Floating orbs in background — more vivid on 404 */
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(70px);
   pointer-events: none;
-  animation: orb-float 8s ease-in-out infinite;
+  will-change: transform;
 }
 .orb-1 {
-  width: 400px; height: 400px;
-  background: rgba(88,101,242,.12);
-  top: -80px; left: -100px;
-  animation-delay: 0s;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(88,101,242,.28) 0%, rgba(88,101,242,.08) 60%, transparent 100%);
+  top: -120px; left: -140px;
+  animation: orb-float-1 10s ease-in-out infinite;
 }
 .orb-2 {
-  width: 300px; height: 300px;
-  background: rgba(235,69,158,.08);
-  bottom: -60px; right: -60px;
-  animation-delay: -3s;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(235,69,158,.22) 0%, rgba(235,69,158,.06) 60%, transparent 100%);
+  bottom: -80px; right: -80px;
+  animation: orb-float-2 12s ease-in-out infinite;
 }
 .orb-3 {
-  width: 200px; height: 200px;
-  background: rgba(87,242,135,.06);
-  top: 50%; left: 60%;
-  animation-delay: -5s;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(87,242,135,.14) 0%, rgba(87,242,135,.04) 60%, transparent 100%);
+  top: 45%; left: 58%;
+  animation: orb-float-3 9s ease-in-out infinite;
 }
-@keyframes orb-float {
-  0%,100% { transform: translate(0,0) scale(1); }
-  33%      { transform: translate(20px,-20px) scale(1.04); }
-  66%      { transform: translate(-15px,15px) scale(.97); }
+.orb-4 {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(254,231,92,.10) 0%, rgba(254,231,92,.02) 60%, transparent 100%);
+  top: 20%; right: 15%;
+  animation: orb-float-1 14s ease-in-out infinite reverse;
+}
+@keyframes orb-float-1 {
+  0%,100% { transform: translate(0,0)       scale(1);    }
+  30%     { transform: translate(28px,-22px) scale(1.05); }
+  60%     { transform: translate(-18px,18px) scale(.96);  }
+  80%     { transform: translate(12px,8px)   scale(1.02); }
+}
+@keyframes orb-float-2 {
+  0%,100% { transform: translate(0,0)        scale(1);    }
+  25%     { transform: translate(-24px,20px) scale(1.04); }
+  55%     { transform: translate(20px,-16px) scale(.97);  }
+  80%     { transform: translate(-10px,10px) scale(1.02); }
+}
+@keyframes orb-float-3 {
+  0%,100% { transform: translate(0,0)       scale(1);    }
+  40%     { transform: translate(16px,-24px) scale(1.06); }
+  70%     { transform: translate(-20px,12px) scale(.95);  }
 }
 
 /* The big 404 */
@@ -204,6 +222,7 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
 
   <!-- Twinkling stars -->
   <div class="stars" id="stars"></div>

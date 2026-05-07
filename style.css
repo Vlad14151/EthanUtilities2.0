@@ -24,9 +24,84 @@ body {
   background: var(--bg); color: var(--text);
   min-height: 100vh; display: flex; flex-direction: column;
   -webkit-font-smoothing: antialiased;
+  position: relative;
 }
+
+/* ─── Global animated background ─────────────────────────────────── */
+/* Pure CSS, transform-only → zero paint/layout cost, GPU composited  */
+body::before {
+  content: '';
+  position: fixed;
+  /* Oversized so drift never reveals edges */
+  inset: -30%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 28% 32%,  rgba(88,101,242,.13)  0%, transparent 70%),
+    radial-gradient(ellipse 48% 55% at 74% 68%,  rgba(235,69,158,.09)  0%, transparent 70%),
+    radial-gradient(ellipse 35% 35% at 58% 12%,  rgba(87,242,135,.05)  0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 10% 80%,  rgba(88,101,242,.06)  0%, transparent 70%);
+  will-change: transform;
+  animation: bg-drift 28s ease-in-out infinite alternate;
+}
+@keyframes bg-drift {
+  0%   { transform: translate(0%,   0%)   scale(1);    }
+  25%  { transform: translate(-2%,  1.5%) scale(1.02); }
+  50%  { transform: translate(1%,   -2%)  scale(.99);  }
+  75%  { transform: translate(2.5%, 1%)   scale(1.01); }
+  100% { transform: translate(-1%,  2.5%) scale(1.02); }
+}
+
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+
+/* ─── Link underline animation ────────────────────────────────────── */
+/* Applied to nav, footer, and in-page links — NOT buttons           */
+.nav-links a,
+.foot-links a,
+.nav-mobile.open a:not(.nav-mobile-discord),
+.inner a:not(.btn),
+.priv-block a,
+.verdict a,
+.tos-notice a {
+  position: relative;
+  overflow: hidden;
+}
+.nav-links a::after,
+.foot-links a::after,
+.nav-mobile.open a:not(.nav-mobile-discord)::after,
+.inner a:not(.btn)::after,
+.priv-block a::after,
+.verdict a::after,
+.tos-notice a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #818cf8, #5865f2, #eb459e, #5865f2, #818cf8);
+  background-size: 200% auto;
+  transform: translateX(-101%);
+  transition: transform .38s cubic-bezier(.4,0,.2,1);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.nav-links a:hover::after,
+.foot-links a:hover::after,
+.nav-mobile.open a:not(.nav-mobile-discord):hover::after,
+.inner a:not(.btn):hover::after,
+.priv-block a:hover::after,
+.verdict a:hover::after,
+.tos-notice a:hover::after {
+  transform: translateX(0%);
+  animation: link-gradient 3s linear infinite;
+}
+@keyframes link-gradient {
+  0%   { background-position: 0%   0%; }
+  50%  { background-position: 100% 0%; }
+  100% { background-position: 0%   0%; }
+}
 
 /* ─── Navbar ─────────────────────────────────────────────────────── */
 .nav {
