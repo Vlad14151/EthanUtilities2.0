@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 </head>
 <body>
-<!-- this is here for nothing -->
+
 <!-- ══ NAVBAR ══════════════════════════════════════════════════════ -->
 <nav class="nav">
   <a class="nav-brand" href="index.html">
@@ -101,7 +101,7 @@
    See the README / bot setup guide for how to add the Express
    status server to your bot in 5 lines of code.
 ────────────────────────────────────────────────────────────────── */
-const STATUS_API = 'https://api.allorigins.win/raw?url=http://142.248.80.164:9768/status';
+const STATUS_API = 'http://142.248.80.164:9768/status'; // base bot URL
 
 function fmtUptime(sec) {
   const d = Math.floor(sec / 86400);
@@ -119,7 +119,10 @@ async function fetchStatus() {
   const el  = document.getElementById('uptime-val');
   const tag = document.getElementById('uptime-tag');
   try {
-    const res  = await fetch(STATUS_API, { signal: AbortSignal.timeout(4000) });
+    // Wrap in allorigins with a timestamp cache-buster so the proxy never serves stale data
+    const bust = Date.now();
+    const proxied = `https://api.allorigins.win/raw?url=${encodeURIComponent(STATUS_API + '?_t=' + bust)}&_cb=${bust}`;
+    const res  = await fetch(proxied, { signal: AbortSignal.timeout(6000), cache: 'no-store' });
     const data = await res.json();
     if (data.online && typeof data.uptime === 'number') {
       el.textContent    = fmtUptime(data.uptime);
@@ -147,7 +150,7 @@ async function fetchStatus() {
 }
 
 fetchStatus();
-setInterval(fetchStatus, 30000); // refresh every 30 seconds
+setInterval(fetchStatus, 60000); // refresh every 60 seconds
 </script>
 </body>
 </html>
