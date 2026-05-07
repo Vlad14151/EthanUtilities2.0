@@ -166,7 +166,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   transition: background .2s, color .2s, box-shadow .2s;
   display: block; white-space: nowrap;
 }
-.nav-links a:hover { background: var(--s3); color: var(--text); }
+.nav-links a:hover { color: var(--text); }
+/* Override underline position for pill nav — sit it right under the text */
+.nav-links a::after { bottom: 5px; }
 .nav-links a.active {
   background: linear-gradient(135deg, var(--accent), #4752c4);
   color: #fff;
