@@ -88,8 +88,10 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   pointer-events: none;
 }
 .nav-links a:hover::after,
+.nav-links a.active::after,
 .foot-links a:hover::after,
 .nav-mobile.open a:not(.nav-mobile-discord):hover::after,
+.nav-mobile.open a.active:not(.nav-mobile-discord)::after,
 .inner a:not(.btn):hover::after,
 .priv-block a:hover::after,
 .verdict a:hover::after,
