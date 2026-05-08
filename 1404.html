@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>404 — Page Not Found · Ethan's Utilities 2.0</title>
+<link rel="icon" href="EthanIconClean.gif"/>
+<link rel="stylesheet" href="style.css"/>
+<meta property="og:title" content="404 — Ethan's Utilities 2.0"/>
+<meta property="og:description" content="This page doesn't exist."/>
+<meta property="og:image" content="Icons/EthansWorldBanner.png"/>
+<meta property="og:type" content="website"/>
+<meta name="theme-color" content="#5865f2"/>
+<style>
+
+.page-404 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  will-change: transform;
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(88,101,242,.28) 0%, rgba(88,101,242,.08) 60%, transparent 100%);
+  top: -120px; left: -140px;
+  animation: orb-float-1 10s ease-in-out infinite;
+}
+.orb-2 {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(235,69,158,.22) 0%, rgba(235,69,158,.06) 60%, transparent 100%);
+  bottom: -80px; right: -80px;
+  animation: orb-float-2 12s ease-in-out infinite;
+}
+.orb-3 {
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(87,242,135,.14) 0%, rgba(87,242,135,.04) 60%, transparent 100%);
+  top: 45%; left: 58%;
+  animation: orb-float-3 9s ease-in-out infinite;
+}
+.orb-4 {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(254,231,92,.10) 0%, rgba(254,231,92,.02) 60%, transparent 100%);
+  top: 20%; right: 15%;
+  animation: orb-float-1 14s ease-in-out infinite reverse;
+}
+@keyframes orb-float-1 {
+  0%,100% { transform: translate(0,0)       scale(1);    }
+  30%     { transform: translate(28px,-22px) scale(1.05); }
+  60%     { transform: translate(-18px,18px) scale(.96);  }
+  80%     { transform: translate(12px,8px)   scale(1.02); }
+}
+@keyframes orb-float-2 {
+  0%,100% { transform: translate(0,0)        scale(1);    }
+  25%     { transform: translate(-24px,20px) scale(1.04); }
+  55%     { transform: translate(20px,-16px) scale(.97);  }
+  80%     { transform: translate(-10px,10px) scale(1.02); }
+}
+@keyframes orb-float-3 {
+  0%,100% { transform: translate(0,0)       scale(1);    }
+  40%     { transform: translate(16px,-24px) scale(1.06); }
+  70%     { transform: translate(-20px,12px) scale(.95);  }
+}
+
+
+.err-code {
+  font-size: clamp(90px, 20vw, 160px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -4px;
+  background: linear-gradient(135deg, #818cf8 0%, var(--accent) 40%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp .5s ease .05s both;
+  position: relative;
+}
+
+.err-code::before {
+  content: '404';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--accent) 60%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glitch 4s steps(1) infinite;
+  clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+}
+@keyframes glitch {
+  0%,92%,100% { opacity: 0; transform: translate(0); }
+  93%  { opacity: .7; transform: translate(-3px, 1px); }
+  94%  { opacity: 0; }
+  95%  { opacity: .5; transform: translate(3px, -1px); }
+  96%  { opacity: 0; }
+}
+
+.err-icon {
+  font-size: 52px;
+  animation: fadeInUp .5s ease .12s both;
+  margin-bottom: -8px;
+}
+
+.err-title {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-top: 16px;
+  animation: fadeInUp .5s ease .18s both;
+}
+
+.err-sub {
+  font-size: 15px;
+  color: var(--sub);
+  max-width: 360px;
+  line-height: 1.7;
+  margin-top: 10px;
+  animation: fadeInUp .5s ease .24s both;
+}
+
+.err-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 32px;
+  animation: fadeInUp .5s ease .32s both;
+}
+
+
+.page-404::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,.012) 2px,
+    rgba(255,255,255,.012) 4px
+  );
+  pointer-events: none;
+}
+
+
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.5);
+  animation: star-twinkle var(--d,3s) ease-in-out var(--dl,0s) infinite;
+}
+@keyframes star-twinkle {
+  0%,100% { opacity: .15; transform: scale(1); }
+  50%      { opacity: .8;  transform: scale(1.5); }
+}
+
+@media (max-width: 768px) {
+  .err-btns { flex-direction: column; align-items: stretch; }
+  .err-btns .btn { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+  <a class="nav-brand" href="/">
+    <img src="EthanIconClean.gif" alt="Ethan's Utilities"/>
+    Ethan's Utilities
+    <span class="ver">2.0</span>
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="guide">Commands</a>
+    <a href="terms">Terms</a>
+    <a href="privacy">Privacy</a>
+    <a href="credits">Credits</a>
+  </div>
+  <a class="nav-cta" href="https://discord.gg/ethansworld" target="_blank">
+    <img class="nav-icon" src="Icons/Discord%20Icon.png" alt="Discord"/>
+    <span>Discord</span>
+  </a>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="/">Home</a>
+  <a href="guide">Commands</a>
+  <a href="terms">Terms</a>
+  <a href="privacy">Privacy</a>
+  <a href="credits">Credits</a>
+  <a href="https://discord.gg/ethansworld" target="_blank" class="nav-mobile-discord">
+    <img src="Icons/Discord%20Icon.png" width="16" height="16" alt=""/> Join Discord
+  </a>
+</nav>
+
+<div class="page-404">
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="err-icon">🔍</div>
+  <div class="err-code">404</div>
+  <h1 class="err-title">Page Not Found</h1>
+  <p class="err-sub">Hmm, looks like this page doesn't exist...</p>
+
+  <div class="err-btns">
+    <a class="btn btn-accent" href="/">🏠 Back to Home</a>
+    <a class="btn btn-ghost" href="guide">📖 View Commands</a>
+    <a class="btn btn-discord" href="https://discord.gg/ethansworld" target="_blank">
+      <img src="Icons/Discord%20Icon.png" width="18" height="18" alt="" style="object-fit:contain;vertical-align:middle"/> Join Discord
+    </a>
+  </div>
+
+</div>
+
+=<footer>
+  <span>© 2026 Ethan's Utilities 2.0 · A bot for Ethan's Community</span>
+  <div class="foot-links">
+    <a href="guide">Commands</a>
+    <a href="terms">Terms</a>
+    <a href="privacy">Privacy</a>
+    <a href="credits">Credits</a>
+    <a href="https://discord.gg/ethansworld" target="_blank">Discord ↗</a>
+  </div>
+</footer>
+
+<script>
+
+(function() {
+  const burger = document.getElementById('nav-burger');
+  const mobile = document.getElementById('nav-mobile');
+  burger.addEventListener('click', () => {
+    const open = mobile.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobile.classList.remove('open');
+    burger.classList.remove('open');
+  }));
+})();
+
+
+(function() {
+  const container = document.getElementById('stars');
+  const count = 60;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --d:${2 + Math.random()*4}s;
+      --dl:${-Math.random()*4}s;
+      width:${1 + Math.random()*2}px;
+      height:${1 + Math.random()*2}px;
+      opacity:${.1 + Math.random()*.4}
+    `;
+    container.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
